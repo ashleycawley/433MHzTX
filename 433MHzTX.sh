@@ -25,12 +25,10 @@ Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $TX_NUMBER $GAPS $DEVICE
 echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 
 
-
 while [ $COUNTER -le $TX_NUMBER ]
 do
-	echo "Sending signal..."
     sudo /home/pi/433Utils/RPi_utils/codesend $CODE $PROTOCOL $PULSE_WIDTH
-    sleep 
+    sleep $GAPS
 	((COUNTER++))
 done
 
