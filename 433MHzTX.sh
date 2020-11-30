@@ -33,13 +33,14 @@ do
 done
 
 ((COUNTER--)) # Corrects Counter
-echo "`date` - $COUNTER signals of the code $CODE were transmitted to the $DEVICE" >> 433MHz.log
 
 # Records end time
 end=`date +%s`
 
 # Calculates time difference and puts number of seconds into $runtime variable
 runtime=$((end-start))
+
+echo "`date` - $COUNTER signals of the code $CODE were transmitted over $runtime seconds to the $DEVICE" >> ~/tx-433MHz.log
 
 # Displays the number of seconds that the script took to execute
 echo "Runtime: $runtime seconds"
