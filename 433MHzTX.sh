@@ -19,6 +19,13 @@ GAPS=$(echo $5 | sed -n -e 's/^.*=//p')
 
 echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 
+while [ $COUNTER -le $TX_NUMBER ]
+do
+	echo "Running $COUNTER"
+	((COUNTER++))
+done
+	echo "All done"
+
 # Records end time
 end=`date +%s`
 
