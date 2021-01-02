@@ -10,7 +10,7 @@ start=`date +%s`
 CODE=$(echo $1 | sed -n -e 's/^.*=//p')
 PROTOCOL=$(echo $2 | sed -n -e 's/^.*=//p')
 PULSE_WIDTH=$(echo $3 | sed -n -e 's/^.*=//p')
-TX_NUMBER=$(echo $4 | sed -n -e 's/^.*=//p')
+REPETITIONS=$(echo $4 | sed -n -e 's/^.*=//p')
 GAPS=$(echo $5 | sed -n -e 's/^.*=//p')
 DEVICE=$(echo $6 | sed -n -e 's/^.*=//p')
 COUNTER="1"
@@ -34,7 +34,7 @@ This tool is an additional layer which sits in front of codesend and easily allo
 
 ### Example Usage of this tool ###
 
-433MHzTX.sh --code=4543795 --protocol=0 --pulse-width=170 --tx-number=5 --gaps=0.2 --device=monitors
+433MHzTX.sh --code=4543795 --protocol=0 --pulse-width=170 --repetitions=5 --gaps=0.2 --device=monitors
 
 
 ### Arguement Descriptions ### 
@@ -62,14 +62,14 @@ fi
 
 ## Debugging Section ##
 echo "
-Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $TX_NUMBER $GAPS $DEVICE
+Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $REPETITIONS $GAPS $DEVICE
 "
 
 echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 ## End of Debugging Section##
 
 ## Transmission Loop which sends the signal ##
-while [ $COUNTER -le $TX_NUMBER ]
+while [ $COUNTER -le $REPETITIONS ]
 do
     sudo $CODESEND_BINARY_PATH $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
