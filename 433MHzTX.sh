@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Notes
+# See README.md for usage and more information.
 
-# Command Structure:
-# 433MHzTX.sh --code=4543795 --protocol=0 --pulse-width=170 --tx-number=5 --gaps=0.2 --device=monitors
+# Node Specific Variables
+NODE_TYPE="master" # Master or Slave
+SLAVE="RFPi2" # Hostname or IP of Slave 433Mhz TX Server
+SLAVE_SSH_PORT="7669"
 
-# Variables
+# Script Variables
 CODE=$(echo $1 | sed -n -e 's/^.*=//p')
 PROTOCOL=$(echo $2 | sed -n -e 's/^.*=//p')
 PULSE_WIDTH=$(echo $3 | sed -n -e 's/^.*=//p')
@@ -13,9 +15,8 @@ REPETITIONS=$(echo $4 | sed -n -e 's/^.*=//p')
 GAPS=$(echo $5 | sed -n -e 's/^.*=//p')
 DEVICE=$(echo $6 | sed -n -e 's/^.*=//p')
 COUNTER="1"
-source ./settings
 
-## Debugging Variables
+# Debugging Variables
 start=`date +%s`
 
 # Script
