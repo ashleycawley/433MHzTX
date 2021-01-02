@@ -4,4 +4,3 @@
 NODE_TYPE="master" # Master or Slave
 SLAVE="" # Hostname or IP of Slave 433Mhz TX Server
 SLAVE_SSH_PORT="7669"
-CODESEND_BINARY_PATH="/home/pi/433Utils/RPi_utils/codesend" # Full path to 'codesend' binary

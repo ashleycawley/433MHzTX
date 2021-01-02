@@ -79,7 +79,7 @@ do
     do
         if [ ! -z "$SLAVE" ]
         then
-            ssh -p $SLAVE_SSH_PORT pi@$SLAVE "sudo $CODESEND_BINARY_PATH $CODE $PROTOCOL $PULSE_WIDTH &" &
+            ssh -p $SLAVE_SSH_PORT pi@$SLAVE "sudo codesend $CODE $PROTOCOL $PULSE_WIDTH &" &
         fi
     done
 
