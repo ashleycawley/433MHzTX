@@ -14,9 +14,11 @@ TX_NUMBER=$(echo $4 | sed -n -e 's/^.*=//p')
 GAPS=$(echo $5 | sed -n -e 's/^.*=//p')
 DEVICE=$(echo $6 | sed -n -e 's/^.*=//p')
 COUNTER="1"
+source ./settings
 
 # Script
 
+## Help / Documentation Section ##
 if [ "$1" == "--help" ] || [ "$1" == "-help" ] || [ "$1" == "-h" ]
 then
 	clear && echo "
@@ -54,19 +56,22 @@ The number of seconds between each signal being sent, so 0.5 would be half a sec
 --device
 The name of the device you are sending the signal to, this is used just for logging and informational purposes.
 " | less
+exit 200
 fi
+## End of Help / Documentation Section ##
 
-# Debugging
+## Debugging Section ##
 echo "
 Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $TX_NUMBER $GAPS $DEVICE
 "
 
 echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
+## End of Debugging Section##
 
-
+## Transmission Loop which sends the signal ##
 while [ $COUNTER -le $TX_NUMBER ]
 do
-    sudo /home/pi/433Utils/RPi_utils/codesend $CODE $PROTOCOL $PULSE_WIDTH
+    sudo $CODESEND_BINARY_PATH $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
 	((COUNTER++))
 done

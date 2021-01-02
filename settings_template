@@ -1,0 +1,5 @@
+## Settings for 433MHzTX.sh
+## Should be contained within a file called "settings" on the same level as the 433MHzTX.sh script
+
+NODE_TYPE="master" # Master or Slave
+CODESEND_BINARY_PATH="/home/pi/433Utils/RPi_utils/codesend" # Full path to 'codesend' binary
