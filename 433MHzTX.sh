@@ -69,10 +69,21 @@ echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 ## End of Debugging Section##
 
 ## Transmission Loop which sends the signal ##
-while [ $COUNTER -le $REPETITIONS ]
+while [ "$COUNTER" -le "$REPETITIONS" ]
 do
     sudo $CODESEND_BINARY_PATH $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
+
+    ## Dispatches signal to Slave Server if one exists, but it should only do this once
+    while [ "$COUNTER" -le "2" ]
+    do
+        if [ ! -z "$SLAVE" ]
+        then
+            ssh -p $SLAVE_SSH_PORT pi@$SLAVE "sudo $CODESEND_BINARY_PATH $CODE $PROTOCOL $PULSE_WIDTH &" &
+        fi
+    done
+
+    # Increments Counter by 1
 	((COUNTER++))
 done
 
