@@ -1,6 +1,0 @@
-## Settings for 433MHzTX.sh
-## Should be contained within a file called "settings" on the same level as the 433MHzTX.sh script
-
-NODE_TYPE="master" # Master or Slave
-SLAVE="" # Hostname or IP of Slave 433Mhz TX Server
-SLAVE_SSH_PORT="7669"
