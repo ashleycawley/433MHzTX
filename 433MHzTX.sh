@@ -20,6 +20,7 @@ start=`date +%s`
 # Script
 
 ## Debugging Section ##
+echo "I ran at `date`" >> /home/pi/433MHzTX/run.log
 echo "
 Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $REPETITIONS $GAPS $DEVICE
 "
