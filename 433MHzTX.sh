@@ -23,15 +23,11 @@ start=`date +%s`
 
 ## Debugging Section ##
 echo "I ran at `date`" >> /home/pi/433MHzTX/run.log
-echo "
-Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $REPETITIONS $GAPS $DEVICE
-"
-
-echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
+# echo "Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $REPETITIONS $GAPS $DEVICE "
 ## End of Debugging Section##
 
 ## Dispatches signal to Slave Server if one exists, but it should only do this once
-ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
+ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS"
 
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
