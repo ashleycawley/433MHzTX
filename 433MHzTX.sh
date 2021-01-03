@@ -2,10 +2,8 @@
 
 # See README.md for usage and more information.
 
-# Node Specific Variables
-source ./settings
-
 # Script Variables
+SCRIPT_PATH="`dirname \"$0\"`"
 CODE=$(echo $1 | sed -n -e 's/^.*=//p')
 PROTOCOL=$(echo $2 | sed -n -e 's/^.*=//p')
 PULSE_WIDTH=$(echo $3 | sed -n -e 's/^.*=//p')
@@ -13,6 +11,9 @@ REPETITIONS=$(echo $4 | sed -n -e 's/^.*=//p')
 GAPS=$(echo $5 | sed -n -e 's/^.*=//p')
 DEVICE=$(echo $6 | sed -n -e 's/^.*=//p')
 COUNTER="1"
+
+# Node Specific Variables
+source $SCRIPT_PATH/settings
 
 # Debugging Variables
 start=`date +%s`
@@ -29,7 +30,7 @@ echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 ## End of Debugging Section##
 
 ## Dispatches signal to Slave Server if one exists, but it should only do this once
-ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "sudo 433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
+ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
 
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
