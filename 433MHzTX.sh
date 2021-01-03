@@ -3,7 +3,8 @@
 # See README.md for usage and more information.
 
 # Script Variables
-SCRIPT_PATH="`dirname \"$0\"`"
+SCRIPT=$(readlink -f $0)
+SCRIPT_PATH=`dirname $SCRIPT`
 CODE=$(echo $1 | sed -n -e 's/^.*=//p')
 PROTOCOL=$(echo $2 | sed -n -e 's/^.*=//p')
 PULSE_WIDTH=$(echo $3 | sed -n -e 's/^.*=//p')
