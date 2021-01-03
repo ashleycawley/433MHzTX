@@ -32,7 +32,7 @@ fi
 while [ "$COUNTER" -le "$REPETITIONS" ]
 do
     echo -e "This is `hostname` \c"
-    sudo codesend $CODE $PROTOCOL $PULSE_WIDTH
+    sudo codesend $CODE $PROTOCOL $PULSE_WIDTH && echo "$CODE" >> /home/pi/433MHzTX/run.log
     sleep $GAPS
 
     # Increments Counter by 1
