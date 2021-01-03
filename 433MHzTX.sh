@@ -32,6 +32,7 @@ ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "433mhztx --code=$CODE
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
 do
+    echo "This is `hostname` sending..."
     sudo codesend $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
 
