@@ -4,10 +4,6 @@
 
 # Node Specific Variables
 source ./settings
-NODE_TYPE="master" # Master or Slave
-SLAVE="RFPi2" # Hostname or IP of Slave 433Mhz TX Server
-SLAVE_SSH_PORT="7669"
-PRIVATE_SSH_KEY_PATH="/home/pi/.ssh/key_to_connect_to_RFPi2"
 
 # Script Variables
 CODE=$(echo $1 | sed -n -e 's/^.*=//p')
@@ -31,20 +27,14 @@ Your arguements were: $CODE $PROTOCOL $PULSE_WIDTH $REPETITIONS $GAPS $DEVICE
 echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 ## End of Debugging Section##
 
+## Dispatches signal to Slave Server if one exists, but it should only do this once
+ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "sudo codesend --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
+
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
 do
     sudo codesend $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
-
-    ## Dispatches signal to Slave Server if one exists, but it should only do this once
-    while [ "$COUNTER" -le "2" ]
-    do
-        if [ ! -z "$SLAVE" ]
-        then
-            ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "sudo codesend --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
-        fi
-    done
 
     # Increments Counter by 1
 	((COUNTER++))
