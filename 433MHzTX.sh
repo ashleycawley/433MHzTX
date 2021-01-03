@@ -27,7 +27,7 @@ echo "I ran at `date`" >> /home/pi/433MHzTX/run.log
 ## End of Debugging Section##
 
 ## Dispatches signal to Slave Server if one exists, but it should only do this once
-ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS"
+ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS --device=$DEVICE"
 
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
