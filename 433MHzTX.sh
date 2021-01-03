@@ -48,7 +48,7 @@ end=`date +%s`
 # Calculates time difference and puts number of seconds into $runtime variable
 runtime=$((end-start))
 
-echo "`date` - $COUNTER signals of the code $CODE were transmitted over $runtime seconds to the $DEVICE" >> ~/tx-433MHz.log
+echo "`date` - $COUNTER signals of the code $CODE were transmitted over $runtime seconds to the $DEVICE" | tee -a ./tx-433MHz.log
 
 # Displays the number of seconds that the script took to execute
 echo "Runtime: $runtime seconds"
