@@ -3,6 +3,7 @@
 # See README.md for usage and more information.
 
 # Node Specific Variables
+source ./settings
 NODE_TYPE="master" # Master or Slave
 SLAVE="RFPi2" # Hostname or IP of Slave 433Mhz TX Server
 SLAVE_SSH_PORT="7669"
