@@ -1,5 +1,5 @@
 # Node Specific Variables
 NODE_TYPE="master" # Master or Slave
-SLAVE="RFPi2" # Hostname or IP of Slave 433Mhz TX Server
+SLAVE="RFPi2" # Hostname/IP of Slave 433Mhz Server *Leave blank if last node in the chain*
 SLAVE_SSH_PORT="7669"
-PRIVATE_SSH_KEY_PATH="/home/pi/.ssh/key_to_connect_to_RFPi2"
+PRIVATE_SSH_KEY_PATH="/home/pi/.ssh/key_to_connect_to_RFPi2" # *Leave blank if last node in the chain*
