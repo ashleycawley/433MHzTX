@@ -6,6 +6,7 @@
 NODE_TYPE="master" # Master or Slave
 SLAVE="RFPi2" # Hostname or IP of Slave 433Mhz TX Server
 SLAVE_SSH_PORT="7669"
+PRIVATE_SSH_KEY_PATH="/home/pi/.ssh/key_to_connect_to_RFPi2"
 
 # Script Variables
 CODE=$(echo $1 | sed -n -e 's/^.*=//p')
@@ -32,7 +33,7 @@ echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
 do
-    sudo $CODESEND_BINARY_PATH $CODE $PROTOCOL $PULSE_WIDTH
+    sudo codesend $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
 
     ## Dispatches signal to Slave Server if one exists, but it should only do this once
@@ -40,7 +41,7 @@ do
     do
         if [ ! -z "$SLAVE" ]
         then
-            ssh -p $SLAVE_SSH_PORT pi@$SLAVE "sudo codesend $CODE $PROTOCOL $PULSE_WIDTH &" &
+            ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "sudo codesend --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
         fi
     done
 
