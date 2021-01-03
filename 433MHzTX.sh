@@ -28,7 +28,7 @@ echo "codesend $CODE $PROTOCOL $PULSE_WIDTH"
 ## End of Debugging Section##
 
 ## Dispatches signal to Slave Server if one exists, but it should only do this once
-ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "sudo codesend --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
+ssh -p $SLAVE_SSH_PORT -i $PRIVATE_SSH_KEY_PATH pi@$SLAVE "sudo 433mhztx --code=$CODE --protocol=$PROTOCOL --pulse-width=$PULSE_WIDTH --repetitions=$REPETITIONS &" &
 
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
