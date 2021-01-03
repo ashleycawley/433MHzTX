@@ -31,7 +31,7 @@ fi
 ## Transmission Loop which sends the signal ##
 while [ "$COUNTER" -le "$REPETITIONS" ]
 do
-    echo "This is `hostname` sending..."
+    echo -e "This is `hostname` \c"
     sudo codesend $CODE $PROTOCOL $PULSE_WIDTH
     sleep $GAPS
 
